@@ -8,6 +8,13 @@ signal dead
 @export var bullet_scene : PackedScene
 @export var fire_rate = 0.25
 
+signal shield_changed
+
+@export var max_shield = 100.0
+@export var shield_regen = 5.0
+
+var shield = 0: set = set_shield
+
 var can_shoot = true
 var thrust = Vector2.ZERO
 var rotation_dir = 0
@@ -43,6 +50,15 @@ func change_state(new_state):
 func _on_invulnerability_timer_timeout():
 	change_state(ALIVE)
 
+
+func set_shield(value):
+	value = min(value, max_shield)
+	shield = value
+	shield_changed.emit(shield / max_shield)
+	if shield < 0:
+		lives -= 1
+		explode()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	change_state(ALIVE)
@@ -54,6 +70,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input()
+	shield += shield_regen * delta
 
 func get_input():
 	thrust = Vector2.ZERO
@@ -97,6 +114,7 @@ func _on_gun_cooldown_timeout():
 
 func set_lives(value):
 	lives = value
+	shield = max_shield
 	lives_changed.emit(lives)
 	if lives <= 0:
 		change_state(DEAD)
@@ -112,9 +130,8 @@ func reset():
 
 func _on_body_entered(body):
 	if body.is_in_group("rocks"):
+		shield -= body.size * 25
 		body.explode()
-		lives -= 1
-		explode()
 
 func explode():
 	$Explosion.show()

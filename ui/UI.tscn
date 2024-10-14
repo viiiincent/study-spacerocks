@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c02svs7ecajmm"]
+[gd_scene load_steps=9 format=3 uid="uid://c02svs7ecajmm"]
 
 [ext_resource type="Script" path="res://ui/HUD.gd" id="1_vbe30"]
 [ext_resource type="FontFile" uid="uid://decawfat6ol7b" path="res://assets/kenvector_future_thin.ttf" id="2_tjsyk"]
 [ext_resource type="Texture2D" uid="uid://cg2cl2dtbveqf" path="res://assets/player_small.png" id="3_74dwv"]
+[ext_resource type="Texture2D" uid="uid://b8qta235t3wod" path="res://assets/shield_gold.png" id="3_203yw"]
 [ext_resource type="Texture2D" uid="uid://dn0vijpwqjra7" path="res://assets/play_button.png" id="4_313by"]
+[ext_resource type="Texture2D" uid="uid://dow7wra6warvq" path="res://assets/bar_glass_200.png" id="4_kolxt"]
 [ext_resource type="Texture2D" uid="uid://f5qbssxr5m88" path="res://assets/play_button_h.png" id="5_qqp6p"]
+[ext_resource type="Texture2D" uid="uid://caq5m782dkddp" path="res://assets/bar_green_200.png" id="5_ubjnb"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_vbe30")
@@ -31,6 +34,21 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_tjsyk")
 theme_override_font_sizes/font_size = 64
 text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_203yw")
+stretch_mode = 3
+
+[node name="ShieldBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.75
+texture_over = ExtResource("4_kolxt")
+texture_progress = ExtResource("5_ubjnb")
 
 [node name="LivesCounter" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

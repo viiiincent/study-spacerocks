@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0cpqg0e8m037"]
+[gd_scene load_steps=10 format=3 uid="uid://b0cpqg0e8m037"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_8kxy5"]
 [ext_resource type="Texture2D" uid="uid://dkmwpcevlanmi" path="res://assets/enemy_saucer.png" id="2_5pxd3"]
+[ext_resource type="PackedScene" uid="uid://csegd2wm8e5dy" path="res://bullet/enemy_bullet.tscn" id="2_g8akq"]
 [ext_resource type="PackedScene" uid="uid://ugb8v1vkxp0h" path="res://enemy/enemy_paths.tscn" id="3_ljb1h"]
 [ext_resource type="PackedScene" uid="uid://ceok66o8oiu10" path="res://explosion/Explosion.tscn" id="4_s6605"]
 
@@ -49,6 +50,7 @@ _data = {
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_8kxy5")
+bullet_scene = ExtResource("2_g8akq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.922386, 0, 0.265735, 1)
@@ -72,4 +74,5 @@ visible = false
 wait_time = 1.5
 autostart = true
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]

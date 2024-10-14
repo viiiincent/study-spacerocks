@@ -1,5 +1,8 @@
 extends RigidBody2D
 
+signal lives_changed
+signal dead
+
 @export var engine_power = 500
 @export var spin_power = 8000
 @export var bullet_scene : PackedScene
@@ -9,8 +12,10 @@ var can_shoot = true
 var thrust = Vector2.ZERO
 var rotation_dir = 0
 var screensize = Vector2.ZERO
-
 var radius
+
+var reset_pos = false
+var lives = 0: set = set_lives
 
 enum {INIT, ALIVE, INVULNERABLE, DEAD}
 var state = INIT
@@ -62,11 +67,14 @@ func _integrate_forces(physics_state):
 	xform.origin.x = wrapf(xform.origin.x, 0 - radius, screensize.x + radius)
 	xform.origin.y = wrapf(xform.origin.y, 0 - radius, screensize.y + radius)
 	physics_state.transform = xform
-	
+	if reset_pos:
+		physics_state.transform.origin = screensize / 2
+		reset_pos = false
+
+
 func shoot():
 	if state == INVULNERABLE:
 		return
-
 	can_shoot = false
 	$GunCooldown.start()
 	var b = bullet_scene.instantiate()
@@ -75,3 +83,19 @@ func shoot():
 
 func _on_gun_cooldown_timeout():
 	can_shoot = true
+
+
+func set_lives(value):
+	lives = value
+	lives_changed.emit(lives)
+	if lives <= 0:
+		change_state(DEAD)
+	else:
+		change_state(INVULNERABLE)
+
+
+func reset():
+	reset_pos = true
+	$Sprite2D.show()
+	lives = 3
+	change_state(ALIVE)

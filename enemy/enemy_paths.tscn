@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://ugb8v1vkxp0h"]
+
+[sub_resource type="Curve2D" id="Curve2D_q6gey"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -87, 139, -175.531, -78.0881, 175.531, 78.0881, 75, 278, -57.3981, -88.7668, 57.3981, 88.7668, 212, 513, -82.0927, 103.45, 82.0927, -103.45, 847, 524, -71.676, 144.83, 71.676, -144.83, 923, 247, 0, 0, 0, 0, 603, -73)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_p5vjd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -72, 533, -102.783, 42.7149, 102.783, -42.7149, 109, 358, -87.432, 16.6855, 87.432, -16.6855, 223, 177, -133.484, -8.00904, 133.484, 8.00904, 451, 113, -6.00678, -24.0271, 6.00678, 24.0271, 686, 245, -68.0768, -30.0339, 68.0768, 30.0339, 768, 419, -108.789, 35.3733, 108.789, -35.3733, 1009, 273, 33.2433, 26.2063, -33.2433, -26.2063, 1230, 103)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_20vl3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1287, 54, 74.0836, 35.3733, -74.0836, -35.3733, 913, 71, 10.6787, -109.457, -10.6787, 109.457, 134, 109, -148.835, 26.0294, 148.835, -26.0294, 364, 396, -83.4275, -13.3484, 83.4275, 13.3484, 515, 505, -133.484, 141.493, 133.484, -141.493, 921, 571, -97.4433, -19.3552, 97.4433, 19.3552, 1101, 409, 0, 0, 0, 0, 1334, 360)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_vlqr6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 840, 812, -114.796, 78.0881, 114.796, -78.0881, 768, 505, 55.3959, 20.0226, -55.3959, -20.0226, 579, 370, -122.805, 111.459, 122.805, -111.459, 399, 254, 0, 0, 0, 0, 192, -56)
+}
+point_count = 5
+
+[node name="EnemyPaths" type="Node"]
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-1.13126, 0)
+scale = Vector2(0.987033, 1)
+curve = SubResource("Curve2D_q6gey")
+
+[node name="Path2D2" type="Path2D" parent="."]
+position = Vector2(-12.7235, -29.5512)
+scale = Vector2(1.00384, 1.04419)
+curve = SubResource("Curve2D_p5vjd")
+
+[node name="Path2D3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_20vl3")
+
+[node name="Path2D4" type="Path2D" parent="."]
+curve = SubResource("Curve2D_vlqr6")

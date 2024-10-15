@@ -30,9 +30,11 @@ func new_game():
 	$Player.reset()
 	await $HUD/Timer.timeout
 	playing = true
+	$Music.play()
 
 
 func new_level():
+	$LevelupSound.play()
 	level += 1
 	$HUD.show_message("Wave %s" % level)
 	for i in level:
@@ -41,6 +43,7 @@ func new_level():
 
 
 func game_over():
+	$Music.stop()
 	playing = false
 	$HUD.game_over()
 
@@ -60,6 +63,7 @@ func spawn_rock(size, pos=null, vel=null):
 
 
 func _on_rock_exploded(size, radius, pos, vel):
+	$ExplosionSound.play()
 	if size <= 1:
 		return
 	for offset in [-1, 1]:

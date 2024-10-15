@@ -27,6 +27,7 @@ func _on_gun_cooldown_timeout():
 	shoot_pulse(3, 0.15)
 
 func shoot():
+	$ShootSound.play()
 	var dir = global_position.direction_to(target.global_position)
 	dir = dir.rotated(randf_range(-bullet_spread, bullet_spread))
 	var b = bullet_scene.instantiate()
@@ -45,6 +46,7 @@ func take_damage(amount):
 		explode()
 
 func explode():
+	$ExplosionSound.play()
 	speed = 0
 	$GunCooldown.stop()
 	$CollisionShape2D.set_deferred("disabled", true)
